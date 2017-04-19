@@ -12,9 +12,11 @@ const bodyParser = require('body-parser').urlencoded();
 const PORT = process.env.PORT || 3000;
 
 // TODO: Include all of the static resources as an argument to app.use()
-
+app.use(express.static('./public'));
 // TODO: (STRETCH) Write a new route that will handle a request and send the new.html file back to the user
-
+app.get('/', function (request, response){
+  response.sendFile('public/new.html'), {root: '.'};
+});
 
 app.post('/articles', bodyParser, function(request, response) {
   // REVIEW: This route will receive a new article from the form page, new.html,
@@ -25,5 +27,6 @@ app.post('/articles', bodyParser, function(request, response) {
 })
 
 app.listen(PORT, function() {
+  console.log(`our server is running on port: ${PORT}`);
   // TODO: Log to the console a message that lets you know which port your server has started on
 });
